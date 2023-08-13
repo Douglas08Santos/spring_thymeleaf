@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Novo professor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <h1>Novo professor</h1>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <form action="/professor" method="POST">
+                    <div class="mb-3">
+                        <!-- O name="{atributo}" - o atributo deve ser com o mesmo nome do objeto-->
+                        <label for="form-label">Nome</label>
+                        <input class="form-control" type="text" name="n">
+                    </div>
+                    <div class="mb-3">
+                        <label for="form-label">Salário</label>
+                        <input class="form-control" type="text" name="sl">
+                    </div>
+                    <div class="mb-3">
+                        <label for="form-label">Status</label>
+                        <select class="form-select" name="st">
+                            <option th:each="status: ${statusProfessor}" th:value="${status}"
+                                th:text="${status}">
+                            </option>
+                            
+                        </select>
+                    </div>
+                    <button class="btn btn-success" type="submit">Adicionar</button>
+                    <a class="btn btn-outline-info" href="javascript:history.back()">Voltar</a>
+                </form>
+            </div>
+        </div>
+
+        
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

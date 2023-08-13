@@ -51,4 +51,20 @@ public class Professor {
     public Status getStatus() {
         return status;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSalary(BigDecimal salary) {
+        this.salary = salary;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }

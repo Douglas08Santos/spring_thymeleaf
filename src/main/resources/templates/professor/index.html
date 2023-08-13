@@ -32,26 +32,27 @@
                     <tbody>
                         <tr th:each="professor: ${professores}">
                             <th class="col-1" scope="row" th:text="${professor.id}"></th>
-                            <td class="col-4" th:text="${professor.name}"></td>
-                            <td class="col-2" th:text="${professor.salary}"></td>
-                            <td class="col-2" th:text="${professor.status}"></td>
-                            <td class="col-1"><a href="#">Detalhes</a></td>
-                            <td class="col-1"><a href="#">Editar</a></td>
-                            <td class="col-2"><a href="#">Apagar</a></td>
+                            <td class="col-3" th:text="${professor.name}"></td>
+                            <td class="col-3" th:text="'R$ ' + ${#numbers.formatDecimal( 
+                                    professor.salary, 1,'POINT', 2, 'COMMA'
+                                )}"></td> <!-- 05.000,00 -->
+                            <td class="col-3" th:text="${professor.status}"></td>
+                            <td class="col-1">
+                                <a href="#" class="btn btn-info">Detalhes</a>
+                            </td>
+                            <td class="col-1">
+                                <a href="#" class="btn btn-warning">Editar</a>
+                            </td>
+                            <td class="col-1">
+                                <a href="#" class="btn btn-danger">Apagar</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-
-        <div class="row">
-            <a href="#">Novo professor</a>
-            
-        </div>
+        <a class="btn btn-success" href="/professor/new">Novo professor</a>
     </div>
-    
-    
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"

@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.dto.ProfessorDTO;
 import com.example.demo.models.Professor;
 import com.example.demo.models.Status;
 import com.example.demo.service.ProfessorService;
@@ -20,7 +22,7 @@ public class ProfessorController {
         Professor professor1 = new Professor("Nome 1",  new BigDecimal(5000), Status.ATIVO);
         Professor professor2 = new Professor("Nome 2",  new BigDecimal(10000), Status.APOSENTADO);
         Professor professor3 = new Professor("Nome 3",  new BigDecimal(7500), Status.INATIVO);
-        Professor professor4 = new Professor("Nome 4",  new BigDecimal(9500), Status.AFASTADO);
+        Professor professor4 = new Professor("Nome 4",  new BigDecimal(950000001), Status.AFASTADO);
 
         service.insert(professor1);
         service.insert(professor2);
@@ -35,11 +37,25 @@ public class ProfessorController {
         }
     }
     
-    @GetMapping("/professores")
+    @GetMapping("/professor")
     public ModelAndView index() {
         // viewName = endereço da pagina template
         ModelAndView mv = new ModelAndView("professor/index");
         mv.addObject("professores", service.listAll());
         return mv;
+    }
+
+    @GetMapping("/professor/new")
+    public ModelAndView addProfessor() {
+        ModelAndView mv = new ModelAndView("professor/add");
+        mv.addObject("statusProfessor", Status.values());
+        return mv;
+    }
+
+    @PostMapping("/professor")
+    public String create(ProfessorDTO professorDTO) {
+        service.insert(professorDTO.toProfessor());
+        // chamar o get da função index
+        return "redirect:/professor";
     }
 }
