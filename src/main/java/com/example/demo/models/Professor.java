@@ -2,7 +2,6 @@ package com.example.demo.models;
 
 import java.math.BigDecimal;
 
-import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,11 +10,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 // O lombok getter e setter não funciona com o thymeleaf - triste :[
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class Professor {
     @Id
