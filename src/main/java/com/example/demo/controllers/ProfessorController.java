@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,6 +13,8 @@ import com.example.demo.dto.ProfessorDTO;
 import com.example.demo.models.Professor;
 import com.example.demo.models.Status;
 import com.example.demo.service.ProfessorService;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class ProfessorController {
@@ -53,9 +56,14 @@ public class ProfessorController {
     }
 
     @PostMapping("/professor")
-    public String create(ProfessorDTO professorDTO) {
-        service.insert(professorDTO.toProfessor());
-        // chamar o get da função index
-        return "redirect:/professor";
+    public String create(@Valid ProfessorDTO professorDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            return "redirect:/professor/new";
+        } else {
+            service.insert(professorDTO.toProfessor());    
+            // chamar o get da função index
+            return "redirect:/professor";
+        }
+        
     }
 }

@@ -5,12 +5,17 @@ import java.math.BigDecimal;
 import com.example.demo.models.Professor;
 import com.example.demo.models.Status;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.ToString;
 
 // DTO -  Data Transfer Object
 @ToString
 public class ProfessorDTO {
+    @NotBlank
+    @NotNull
     private String n;
+    @NotNull
     private BigDecimal sl;
     private Status st;
 
