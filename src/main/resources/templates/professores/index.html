@@ -35,7 +35,8 @@
                                 <a th:href="@{/professores/{id}/edit(id = ${professor.id})}" class="btn btn-warning">Editar</a>
                             </td>
                             <td class="col-1">
-                                <a href="#" class="btn btn-danger">Apagar</a>
+                                <a th:href="@{/professores/{id}/delete(id = ${professor.id})}" 
+                                    class="btn btn-danger">Apagar</a>
                             </td>
                         </tr>
                     </tbody>

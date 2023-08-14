@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +26,10 @@ public class ProfessorService {
 
     public Optional<Professor> findById(Long id){
         return repository.findById(id);
+    }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
     
 }

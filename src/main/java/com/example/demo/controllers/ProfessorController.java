@@ -131,4 +131,11 @@ public class ProfessorController {
             
         }      
     }
+
+    @GetMapping("/{id}/delete")
+    public String delete(@PathVariable Long id) {
+        service.delete(id);
+        return "redirect:/professores";
+        
+    }
 }
