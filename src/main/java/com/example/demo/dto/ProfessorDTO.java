@@ -54,4 +54,10 @@ public class ProfessorDTO {
         return professor;
         
     }
+
+    public void fromProfessor(Professor professor) {
+        this.n = professor.getName();
+        this.sl = professor.getSalary();
+        this.st = professor.getStatus();
+    }
 }

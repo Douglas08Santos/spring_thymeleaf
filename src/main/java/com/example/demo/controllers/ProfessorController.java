@@ -89,14 +89,16 @@ public class ProfessorController {
         
     }
 
-    @GetMapping("/professores/edit/{id}")
-    public ModelAndView edit(@PathVariable Long id) {
+    @GetMapping("/professores/{id}/edit")
+    public ModelAndView edit(@PathVariable Long id, ProfessorDTO professorDTO) {
         Optional<Professor> optional = service.findById(id);
 
         if (optional.isPresent()) {
-            ModelAndView mv = new ModelAndView("professores/details");
+            ModelAndView mv = new ModelAndView("professores/edit");
             System.out.println(optional.get());
-            mv.addObject("professor", optional.get());
+            professorDTO.fromProfessor(optional.get());
+            mv.addObject("professorId", optional.get().getId());
+            mv.addObject("statusProfessor", Status.values());
             return mv;
         } else {
             System.out.println("Professor com o id " + id + " não encontrado!!");
