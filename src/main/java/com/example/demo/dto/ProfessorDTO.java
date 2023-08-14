@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import com.example.demo.models.Professor;
 import com.example.demo.models.Status;
 
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.ToString;
@@ -16,8 +17,13 @@ public class ProfessorDTO {
     @NotNull
     private String n;
     @NotNull
+    @DecimalMin("1")
     private BigDecimal sl;
     private Status st;
+
+    
+    public ProfessorDTO() {
+    }
 
     public String getN() {
         return n;

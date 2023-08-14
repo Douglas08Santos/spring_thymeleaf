@@ -40,29 +40,32 @@ public class ProfessorController {
         }
     }
     
-    @GetMapping("/professor")
+    @GetMapping("/professores")
     public ModelAndView index() {
         // viewName = endereço da pagina template
-        ModelAndView mv = new ModelAndView("professor/index");
+        ModelAndView mv = new ModelAndView("professores/index");
         mv.addObject("professores", service.listAll());
         return mv;
     }
 
-    @GetMapping("/professor/new")
-    public ModelAndView addProfessor() {
-        ModelAndView mv = new ModelAndView("professor/add");
+    @GetMapping("/professores/add")
+    public ModelAndView addProfessor(ProfessorDTO professorDTO) {
+        ModelAndView mv = new ModelAndView("professores/add");
         mv.addObject("statusProfessor", Status.values());
         return mv;
     }
 
-    @PostMapping("/professor")
-    public String create(@Valid ProfessorDTO professorDTO, BindingResult result) {
+    @PostMapping("/professores")
+    public ModelAndView create(@Valid ProfessorDTO professorDTO, BindingResult result) {
         if (result.hasErrors()) {
-            return "redirect:/professor/new";
+            System.out.println(result.getErrorCount());
+            ModelAndView mv = new ModelAndView("professores/add");
+            mv.addObject("statusProfessor", Status.values());
+            return mv;
         } else {
             service.insert(professorDTO.toProfessor());    
             // chamar o get da função index
-            return "redirect:/professor";
+            return new ModelAndView("redirect:/professores");
         }
         
     }

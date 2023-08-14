@@ -17,19 +17,21 @@
 
         <div class="container">
             <div class="row">
-                <form action="/professor" method="POST">
+                <form th:object="${professorDTO}" action="/professores" method="POST">
                     <div class="mb-3">
                         <!-- O name="{atributo}" - o atributo deve ser com o mesmo nome do objeto-->
                         <label for="form-label">Nome</label>
-                        <input class="form-control" type="text" name="n">
+                        <input class="form-control" th:errorclass="is-invalid" type="text" th:field="*{n}">
+                        <div class="invalid-feedback" th:errors="*{n}"></div>
                     </div>
                     <div class="mb-3">
                         <label for="form-label">Salário</label>
-                        <input class="form-control" type="text" name="sl">
+                        <input class="form-control" th:errorclass="is-invalid" type="text" th:field="*{sl}">
+                        <div class="invalid-feedback" th:errors="*{sl}"></div>
                     </div>
                     <div class="mb-3">
                         <label for="form-label">Status</label>
-                        <select class="form-select" name="st">
+                        <select class="form-select" th:field="*{st}">
                             <option th:each="status: ${statusProfessor}" th:value="${status}"
                                 th:text="${status}">
                             </option>
