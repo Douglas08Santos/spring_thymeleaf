@@ -10,10 +10,14 @@
     <div class="container mt-3">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a href="/" aria-current="page" class="nav-link">Home</a>
+                <a href="/" aria-current="page" class="nav-link"
+                    th:classappend="${title == 'Home'} ? 'active': '' ">Home</a>
+                    <!--title == 'Home' - alternativa escolhida, mas o ideal seria um
+                        condicional a partir do endereço-->
             </li>
             <li class="nav-item">
-                <a href="/professores" class="nav-link">Professores</a>
+                <a href="/professores" class="nav-link"
+                    th:classappend="${title == 'Lista de professores'} ? 'active': '' ">Professores</a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">Alunos</a>
