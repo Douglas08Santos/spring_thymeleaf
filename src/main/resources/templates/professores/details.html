@@ -18,8 +18,8 @@
             <hr />
             <div class="row">
                 <div class="col-12">
-                    <button class="btn btn-success" type="submit">Editar</button>
-                    <a class="btn btn-outline-info" href="javascript:history.back()">Voltar</a>
+                    <a th:href="@{/professores/{id}/edit(id = ${professor.id})}" class="btn btn-warning">Editar</a>
+                    <a class="btn btn-outline-info" href="/professores">Voltar</a>
                 </div>
             </div>
         </div>

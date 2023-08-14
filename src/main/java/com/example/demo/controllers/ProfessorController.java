@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dto.ProfessorDTO;
@@ -19,6 +20,7 @@ import com.example.demo.service.ProfessorService;
 import jakarta.validation.Valid;
 
 @Controller
+@RequestMapping("/professores")
 public class ProfessorController {
     ProfessorService service;
 
@@ -42,7 +44,7 @@ public class ProfessorController {
         }
     }
     
-    @GetMapping("/professores")
+    @GetMapping("")
     public ModelAndView index() {
         // viewName = endereço da pagina template
         ModelAndView mv = new ModelAndView("professores/index");
@@ -50,14 +52,14 @@ public class ProfessorController {
         return mv;
     }
 
-    @GetMapping("/professores/add")
+    @GetMapping("/add")
     public ModelAndView addProfessor(ProfessorDTO professorDTO) {
         ModelAndView mv = new ModelAndView("professores/add");
         mv.addObject("statusProfessor", Status.values());
         return mv;
     }
 
-    @PostMapping("/professores")
+    @PostMapping("")
     public ModelAndView create(@Valid ProfessorDTO professorDTO, BindingResult result) {
         if (result.hasErrors()) {
             System.out.println(result.getErrorCount());
@@ -71,7 +73,7 @@ public class ProfessorController {
         }
     }
 
-    @GetMapping("/professores/{id}")
+    @GetMapping("/{id}")
     public ModelAndView details(@PathVariable Long id) {
         Optional<Professor> optional = service.findById(id);
 
@@ -89,7 +91,7 @@ public class ProfessorController {
         
     }
 
-    @GetMapping("/professores/{id}/edit")
+    @GetMapping("/{id}/edit")
     public ModelAndView edit(@PathVariable Long id, ProfessorDTO professorDTO) {
         Optional<Professor> optional = service.findById(id);
 
@@ -104,8 +106,29 @@ public class ProfessorController {
             System.out.println("Professor com o id " + id + " não encontrado!!");
             return new ModelAndView("redirect:/professores");
         }
-        
+         
+    }
 
-        
+    @PostMapping("/{id}")
+    public ModelAndView update(@PathVariable Long id, @Valid ProfessorDTO professorDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            return null;
+        } else {
+            //Verificar se o professor com o id passado já existe
+            Optional<Professor> optional = service.findById(id);
+            if (optional.isPresent()) {
+                Professor professor = optional.get();
+                professor.setName(professorDTO.getN());
+                professor.setSalary(professorDTO.getSl());
+                professor.setStatus(professorDTO.getSt());
+
+                service.insert(professor);
+                return new ModelAndView("redirect:/professores/"+professor.getId());
+            } else {
+                System.out.println("Professor com o id " + id + " não encontrado!!");
+                return new ModelAndView("redirect:/professores");
+            }
+            
+        }      
     }
 }
