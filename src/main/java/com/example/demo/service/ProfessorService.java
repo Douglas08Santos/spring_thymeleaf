@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,10 @@ public class ProfessorService {
 
     public List<Professor> listAll() {
         return repository.findAll();
+    }
+
+    public Optional<Professor> findById(Long id){
+        return repository.findById(id);
     }
     
 }

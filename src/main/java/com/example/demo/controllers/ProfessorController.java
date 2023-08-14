@@ -2,10 +2,12 @@ package com.example.demo.controllers;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -63,10 +65,45 @@ public class ProfessorController {
             mv.addObject("statusProfessor", Status.values());
             return mv;
         } else {
-            service.insert(professorDTO.toProfessor());    
+            Professor newProfessor = service.insert(professorDTO.toProfessor());    
             // chamar o get da função index
+            return new ModelAndView("redirect:/professores/"+newProfessor.getId());
+        }
+    }
+
+    @GetMapping("/professores/{id}")
+    public ModelAndView details(@PathVariable Long id) {
+        Optional<Professor> optional = service.findById(id);
+
+        if (optional.isPresent()) {
+            ModelAndView mv = new ModelAndView("professores/details");
+            System.out.println(optional.get());
+            mv.addObject("professor", optional.get());
+            return mv;
+        } else {
+            System.out.println("Professor com o id " + id + " não encontrado!!");
             return new ModelAndView("redirect:/professores");
         }
+        
+
+        
+    }
+
+    @GetMapping("/professores/edit/{id}")
+    public ModelAndView edit(@PathVariable Long id) {
+        Optional<Professor> optional = service.findById(id);
+
+        if (optional.isPresent()) {
+            ModelAndView mv = new ModelAndView("professores/details");
+            System.out.println(optional.get());
+            mv.addObject("professor", optional.get());
+            return mv;
+        } else {
+            System.out.println("Professor com o id " + id + " não encontrado!!");
+            return new ModelAndView("redirect:/professores");
+        }
+        
+
         
     }
 }

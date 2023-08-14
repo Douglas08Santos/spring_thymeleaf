@@ -1,10 +1,10 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 
-<head th:replace="~{fragments::head('Novo professor')}"></head>
+<head th:replace="~{fragments::head('Editar professor #' + ${professor.id}')}"></head>
 
 <body>
-    <header th:replace="~{fragments::header('Novo professor')}"></header>
+    <header th:replace="~{fragments::header('Editar professor #' + ${professor.id}')}"></header>
     <div class="container mt-4">
         <div class="container">
             <div class="row">
@@ -29,7 +29,7 @@
                         </select>
                     </div>
                     <hr />
-                    <button class="btn btn-success" type="submit">Adicionar</button>
+                    <button class="btn btn-success" type="submit">Editar</button>
                     <a class="btn btn-outline-info" href="javascript:history.back()">Voltar</a>
                 </form>
             </div>

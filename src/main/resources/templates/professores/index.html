@@ -29,10 +29,10 @@
                                 )}"></td> <!-- 05.000,00 -->
                             <td class="col-3" th:text="${professor.status}"></td>
                             <td class="col-1">
-                                <a href="#" class="btn btn-info">Detalhes</a>
+                                <a th:href="@{/professores/{id}(id = ${professor.id})}" class="btn btn-info">Detalhes</a>
                             </td>
                             <td class="col-1">
-                                <a href="#" class="btn btn-warning">Editar</a>
+                                <a th:href="@{/professores/edit/{id}(id = ${professor.id})} class="btn btn-warning">Editar</a>
                             </td>
                             <td class="col-1">
                                 <a href="#" class="btn btn-danger">Apagar</a>
